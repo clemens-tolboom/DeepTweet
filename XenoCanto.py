@@ -26,7 +26,7 @@ def get_remote_audio_file(xc_id):
         wget.download(url, file_name)
         return True
     else:
-        print('Already downloaded', xc_id)
+        print('Already downloaded', xc_id, file_name)
         return False
     # DO NOT USE: this would try to create 1/download
     #wget.download(url, out=sample_dir)
@@ -40,7 +40,7 @@ def convert_mp3_to_wav(xc_id):
         print('mp3 to wav', file_wav)
         return True
     else:
-        print('Already converted', xc_id)
+        print('Already converted', xc_id, file_wav)
         return False
 
 def main():

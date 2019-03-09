@@ -22,8 +22,8 @@ def download(dir, id):
     zip_file = get_path_zip(dir, id)
 
     if not os.path.exists(zip_file):
-        print('Downloading', url, id)
         url = gbif_url.format(id)
+        print('Downloading', url, id)
         wget.download(url, out=dir)
     else:
         print('Already downloaded zip', id)

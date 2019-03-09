@@ -2,6 +2,8 @@
 
 # https://gist.github.com/rudolfbyker/8fc0d99ecadad0204813d97fee2c6c06
 
+# What about https://stackoverflow.com/questions/35817013/is-it-possible-to-find-silence-in-audio-file-using-python
+
 from scipy.io import wavfile
 import os
 import numpy as np

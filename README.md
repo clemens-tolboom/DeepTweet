@@ -20,5 +20,6 @@ These splits will be used for training.
 
 ```
 pipenv shell
+mkdir data/samples/splits
 . ./bin/split.py
 ```

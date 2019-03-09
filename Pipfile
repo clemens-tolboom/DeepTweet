@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+scipy = "*"
+jupyter = "*"
+tornado = "~=4.2"
+h5py = "*"
+mat4py = "*"
+pandas = "*"
+wget = "*"
+pydub = "*"
+matplotlib = "*"
+tqdm = "*"
+
+[requires]
+python_version = "3.6"

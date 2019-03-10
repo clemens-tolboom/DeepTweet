@@ -1,6 +1,8 @@
 import os
 import gbif
 import pandas as pd
+import XenoCanto as xc
+import split
 
 data_dir = ''
 
@@ -14,15 +16,11 @@ def set_data_dir(directory):
     data_dir = directory
 
     os.makedirs(data_dir, exist_ok=True)
+    os.makedirs(get_gbif_dir(), exist_ok=True)
+    os.makedirs(get_sample_dir(), exist_ok=True)
+    os.makedirs(get_fragments_dir(), exist_ok=True)
 
-    if not os.path.isdir(get_gbif_dir()):
-        os.mkdir(get_gbif_dir())
-
-    if not os.path.isdir(get_sample_dir()):
-        os.mkdir(get_sample_dir())
-
-    if not os.path.isdir(get_fragments_dir()):
-        os.mkdir(get_fragments_dir())
+    xc.set_dir(get_sample_dir)
 
 
 def get_data_dir():
@@ -64,7 +62,7 @@ def fix_gbif_df(df):
                                   .lstrip('0'))
 
 
-def get_sample_path(df, xc_id):
+def get_fragments_path(df, xc_id):
     """
     We want to map the GBIF taxonomy into a directory tree
 
@@ -73,6 +71,22 @@ def get_sample_path(df, xc_id):
     row = df[df['XC_ID'] == xc_id].iloc[0]
     path = '{kingdom}/{phylum}/{class}/{order}/{family}/{genus}/{species}/'.format(**row)
     return get_fragments_dir() + path
+
+
+def build_fragments(df, args):
+    xc_id = '100113'
+
+    xc.convert_mp3_to_wav(xc_id)
+
+    in_file = xc.get_wav_file(xc_id)
+
+    out_path = get_fragments_path(df, xc_id)
+    os.makedirs(out_path, exist_ok=True)
+
+    print(in_file, 'file://' + out_path)
+
+    args['output_dir'] = out_path
+    split.split(in_file, args)
 
 
 def main():
@@ -85,7 +99,15 @@ def main():
     fix_gbif_df(df)
 
     xc_id = df['XC_ID'].iloc[0]
-    print(get_sample_path(df, xc_id))
+    print(get_fragments_path(df, xc_id))
+
+    args = dict(split.defaults)
+
+    args['silence_threshold'] = 0.01
+    args['min_silence_length'] = 1.0
+    args['dry_run'] = False
+
+    build_fragments(df, args)
 
 
 if __name__ == '__main__':

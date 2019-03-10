@@ -10,10 +10,10 @@ def set_dir(samples):
     sample_dir=samples
 
 def get_mp3_file(xc_id):
-    return sample_dir + '{}.mp3'.format(xc_id)
+    return sample_dir() + '{}.mp3'.format(xc_id)
 
 def get_wav_file(xc_id):
-    return sample_dir + '{}.wav'.format(xc_id)
+    return sample_dir() + '{}.wav'.format(xc_id)
     
 def url_download(xc_id):
     return (xc_url + '{}/download').format(xc_id)

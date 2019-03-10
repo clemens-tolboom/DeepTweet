@@ -41,7 +41,7 @@ def download():
     if not os.path.exists(zip_file):
         url = gbif_url.format(get_gbif_id())
         print('Downloading', url, get_gbif_id())
-        wget.download(url, out=dir)
+        wget.download(url, out=get_gbif_dir())
     else:
         print('Already downloaded zip', get_gbif_id())
         return False

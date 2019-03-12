@@ -10,10 +10,12 @@ def set_dir(samples):
     sample_dir=samples
 
 def get_mp3_file(xc_id):
-    return sample_dir() + '{}.mp3'.format(xc_id)
+    global sample_dir
+    return (sample_dir + '{}.mp3').format(xc_id)
 
 def get_wav_file(xc_id):
-    return sample_dir() + '{}.wav'.format(xc_id)
+    global sample_dir
+    return sample_dir + '{}.wav'.format(xc_id)
     
 def url_download(xc_id):
     return (xc_url + '{}/download').format(xc_id)
@@ -50,6 +52,7 @@ def main():
     print('temp dir    :', test_dir)
     print('get_mp3_file:', get_mp3_file(1))
     print('get_wav_file:', get_wav_file(1))
+    convert_mp3_to_wav(1)
 
 if __name__ == "__main__":
     main()

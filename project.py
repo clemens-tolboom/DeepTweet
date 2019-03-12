@@ -20,7 +20,7 @@ def set_data_dir(directory):
     os.makedirs(get_sample_dir(), exist_ok=True)
     os.makedirs(get_fragments_dir(), exist_ok=True)
 
-    xc.set_dir(get_sample_dir)
+    xc.set_dir(get_sample_dir())
 
 
 def get_data_dir():
